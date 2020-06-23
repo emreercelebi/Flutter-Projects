@@ -8,12 +8,16 @@ import 'package:english_words/english_words.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final _primaryColor = const Color(0xff19365e);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Startup Name Generator',
-      home: RandomWords(),
-    );
+        title: 'Startup Name Generator',
+        home: RandomWords(),
+        theme: ThemeData(
+          primaryColor: _primaryColor,
+        ));
   }
 }
 
@@ -24,7 +28,10 @@ class RandomWords extends StatefulWidget {
 
 class _RandomWordsState extends State<RandomWords> {
   final _suggestions = <WordPair>[];
-  final _biggerFont = TextStyle(fontSize: 18.0);
+  final _biggerFont = TextStyle(
+    fontSize: 18.0,
+    color: Colors.cyanAccent,
+  );
   final _saved = Set<WordPair>();
 
   @override
@@ -44,17 +51,27 @@ class _RandomWordsState extends State<RandomWords> {
   }
 
   Widget _buildSuggestions() {
-    return ListView.builder(
-      padding: EdgeInsets.all(16.0),
-      itemBuilder: (context, i) {
-        if (i.isOdd) return Divider();
+    final _primaryColor = const Color(0xff1c4278);
+    final _dividerColor = const Color(0xff0edde8);
+    return Container(
+      child: ListView.builder(
+        padding: EdgeInsets.all(16.0),
+        itemBuilder: (context, i) {
+          if (i.isOdd) {
+            return Divider(
+              color: _dividerColor,
+              thickness: 2.0,
+            );
+          }
 
-        final index = i ~/ 2; // ~/ is integer division notation
-        if (index >= _suggestions.length) {
-          _suggestions.addAll(generateWordPairs().take(10));
-        }
-        return _buildRow(_suggestions[index]);
-      },
+          final index = i ~/ 2; // ~/ is integer division notation
+          if (index >= _suggestions.length) {
+            _suggestions.addAll(generateWordPairs().take(10));
+          }
+          return _buildRow(_suggestions[index]);
+        },
+      ),
+      color: _primaryColor,
     );
   }
 
@@ -82,6 +99,7 @@ class _RandomWordsState extends State<RandomWords> {
   }
 
   void _pushSaved() {
+    final _primaryColor = const Color(0xff1c4278);
     Navigator.of(context)
         .push(MaterialPageRoute<void>(builder: (BuildContext context) {
       final tiles = _saved.map((WordPair pair) {
@@ -100,8 +118,11 @@ class _RandomWordsState extends State<RandomWords> {
         appBar: AppBar(
           title: Text('Saved Suggestions'),
         ),
-        body: ListView(
-          children: divided,
+        body: Container(
+          child: ListView(
+            children: divided,
+          ),
+          color: _primaryColor,
         ),
       );
     }));
