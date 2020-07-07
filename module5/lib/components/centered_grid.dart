@@ -14,14 +14,26 @@ class CenteredGrid extends StatelessWidget {
           title: Text(title),
         ),
         body: Column(children: <Widget>[
-          Row(children: <Widget>[
-            Placeholder(),
-            Placeholder(),
-          ]),
-          Row(children: <Widget>[
-            Placeholder(),
-            Placeholder(),
-          ]),
+          Expanded(
+            child: Row(children: <Widget>[
+              Expanded(
+                child: Placeholder(),
+              ),
+              Expanded(
+                child: Placeholder(),
+              ),
+            ]),
+          ),
+          Expanded(
+            child: Row(children: <Widget>[
+              Expanded(
+                child: Placeholder(),
+              ),
+              Expanded(
+                child: Placeholder(),
+              ),
+            ]),
+          ),
         ]),
       ),
     );
