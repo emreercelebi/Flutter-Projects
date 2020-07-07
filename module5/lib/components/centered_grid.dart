@@ -5,6 +5,8 @@ class CenteredGrid extends StatelessWidget {
 
   const CenteredGrid({Key key, this.title}) : super(key: key);
 
+  final dim = 100.0;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,26 +16,30 @@ class CenteredGrid extends StatelessWidget {
           title: Text(title),
         ),
         body: Column(children: <Widget>[
-          Expanded(
-            child: Row(children: <Widget>[
-              Expanded(
-                child: Placeholder(),
-              ),
-              Expanded(
-                child: Placeholder(),
-              ),
-            ]),
-          ),
-          Expanded(
-            child: Row(children: <Widget>[
-              Expanded(
-                child: Placeholder(),
-              ),
-              Expanded(
-                child: Placeholder(),
-              ),
-            ]),
-          ),
+          Row(children: <Widget>[
+            SizedBox(
+              child: Placeholder(),
+              width: dim,
+              height: dim,
+            ),
+            SizedBox(
+              child: Placeholder(),
+              width: dim,
+              height: dim,
+            ),
+          ]),
+          Row(children: <Widget>[
+            SizedBox(
+              child: Placeholder(),
+              width: dim,
+              height: dim,
+            ),
+            SizedBox(
+              child: Placeholder(),
+              width: dim,
+              height: dim,
+            ),
+          ]),
         ]),
       ),
     );
