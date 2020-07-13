@@ -20,13 +20,9 @@ class BusinessCardTab extends StatelessWidget {
       constraints: BoxConstraints(
         maxWidth: 200.0,
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(1000.0),
-        child: Image.asset(
-          'assets/images/profile_photo.PNG',
-          width: MediaQuery.of(context).size.width * 0.5,
-          height: MediaQuery.of(context).size.width * 0.5
-        ),
+      child: CircleAvatar(
+        radius: 100,
+        backgroundImage: AssetImage('assets/images/profile_photo.PNG'),
       ),
     );
   }
