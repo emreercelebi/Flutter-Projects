@@ -5,9 +5,15 @@ import 'Tabs/predictor_tab.dart';
 
 class TabScreen extends StatelessWidget {
   final List<Tab> tabs = <Tab>[
-    Tab(text: '1'),
-    Tab(text: '2'),
-    Tab(text: '3'),
+    Tab(
+      icon: Icon(Icons.person),
+    ),
+    Tab(
+      icon: Icon(Icons.work),
+    ),
+    Tab(
+      icon: Icon(Icons.help_outline),
+    ),
   ];
 
   @override
