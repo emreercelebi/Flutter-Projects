@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'Tabs/business_card_tab.dart';
+import 'Tabs/resume_tab.dart';
+import 'Tabs/predictor_tab.dart';
 
 class TabScreen extends StatelessWidget {
   final List<Tab> tabs = <Tab>[
@@ -13,21 +16,18 @@ class TabScreen extends StatelessWidget {
       length: tabs.length,
       child: Scaffold(
         appBar: AppBar(
+          title: Center(
+            child: Text('Call Me Maybe'),
+          ),
           bottom: TabBar(
             tabs: tabs,
           ),
         ),
         body: TabBarView(
           children: [
-            Center(
-              child: Text('1'),
-            ),
-            Center(
-              child: Text('2'),
-            ),
-            Center(
-              child: Text('3'),
-            ),
+            BusinessCardTab(),
+            ResumeTab(),
+            PredictorTab(),
           ],
         ),
       ),
