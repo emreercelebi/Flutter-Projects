@@ -22,6 +22,13 @@ class Styles {
     color: Color(lightGray),
   );
 
+  static final headingSubBold = TextStyle(
+    fontFamily: _fontFamilyName,
+    fontSize: 24.0,
+    fontWeight: FontWeight.bold,
+    color: Color(lightGray),
+  );
+
   static final textLink = TextStyle(
     fontFamily: _fontFamilyName,
     fontSize: 16.0,

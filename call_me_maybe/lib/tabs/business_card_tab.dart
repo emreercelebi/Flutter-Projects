@@ -4,12 +4,6 @@ import 'package:callmemaybe/helpers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BusinessCardTab extends StatelessWidget {
-  final fullName = 'Emre Ercelebi';
-  final title = 'Software Engineer';
-  final phoneNumber = '(804) 555-1234';
-  final phoneDigits = '8045551234';
-  final website =
-      'https://media1.giphy.com/media/UTLjndqhYc1qlYmNwa/giphy.gif?cid=ecf05e47157c3f5a8ee55a62d6eafe0031aceff0df015431&rid=giphy.gif';
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +15,11 @@ class BusinessCardTab extends StatelessWidget {
             profilePhoto(context),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Helpers.styledText(fullName, Styles.headingMain),
+              child: Helpers.styledText(Helpers.fullName, Styles.headingMain),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Helpers.styledText(title, Styles.headingSub),
+              child: Helpers.styledText(Helpers.title, Styles.headingSub),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -54,7 +48,7 @@ class BusinessCardTab extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 24.0, 0, 0),
       child: RaisedButton(
-        onPressed: () => _launchURL(website),
+        onPressed: () => _launchURL(Helpers.website),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -76,8 +70,8 @@ class BusinessCardTab extends StatelessWidget {
 
   Widget phoneDisplay() {
     return GestureDetector(
-      child: Helpers.styledText(phoneNumber, Styles.textLink),
-      onTap: () => _launchURL('sms:' + phoneDigits),
+      child: Helpers.styledText(Helpers.phoneNumber, Styles.textLink),
+      onTap: () => _launchURL('sms:' + Helpers.phoneDigits),
     );
   }
 

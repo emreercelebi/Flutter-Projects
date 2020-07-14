@@ -11,7 +11,16 @@ class ExperienceList extends StatefulWidget {
 }
 
 class _ExperienceListState extends State<ExperienceList> {
-  var _experienceList = new List<Widget>();
+  var _experienceList;
+
+  @override
+  void initState() {
+    super.initState();
+    _experienceList = List<Widget>.of(
+      [_resumeHeader()],
+      growable: true,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +43,7 @@ class _ExperienceListState extends State<ExperienceList> {
             .toList();
 
         setState(() {
-          _experienceList = newList;
+          _experienceList.addAll(newList);
         });
       }
     });
@@ -44,6 +53,14 @@ class _ExperienceListState extends State<ExperienceList> {
         children: _experienceList,
       ),
     );
+  }
+
+  _resumeHeader() {
+    return Column(children: [
+      Helpers.styledText(Helpers.fullName, Styles.headingSubBold),
+      Helpers.styledText(Helpers.email, Styles.textLarge),
+      Helpers.styledText(Helpers.phoneNumber, Styles.textLarge),
+    ]);
   }
 }
 
@@ -58,18 +75,31 @@ class JobExperienceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8.0),
+      padding: EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Helpers.styledText(jobExperience.title, Styles.textLargeBold),
-          Helpers.styledText(jobExperience.company, Styles.textLarge),
-          Row(
-            children: [
-              Helpers.styledText(
-                  jobExperience.startDate + ' - ' + jobExperience.endDate,
-                  Styles.textSubItalic),
-              Helpers.styledText(jobExperience.location, Styles.textSubItalic),
-            ],
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 4.0, 0, 4.0),
+            child:
+                Helpers.styledText(jobExperience.title, Styles.textLargeBold),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 4.0, 0, 4.0),
+            child: Helpers.styledText(jobExperience.company, Styles.textLarge),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 4.0, 0, 4.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Helpers.styledText(
+                    jobExperience.startDate + ' - ' + jobExperience.endDate,
+                    Styles.textSubItalic),
+                Helpers.styledText(
+                    jobExperience.location, Styles.textSubItalic),
+              ],
+            ),
           ),
           Helpers.styledText(jobExperience.description, Styles.textBody),
         ],
