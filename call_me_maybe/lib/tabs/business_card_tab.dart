@@ -39,7 +39,7 @@ class BusinessCardTab extends StatelessWidget {
       ),
       child: CircleAvatar(
         radius: 100,
-        backgroundImage: AssetImage('assets/images/profile_photo.PNG'),
+        backgroundImage: AssetImage('lib/assets/images/profile_photo.PNG'),
       ),
     );
   }

@@ -24,29 +24,33 @@ class _ExperienceListState extends State<ExperienceList> {
 
   @override
   Widget build(BuildContext context) {
-    DefaultAssetBundle.of(context)
-        .loadString('assets/data/job_data.json')
-        .then((value) {
-      final jsonData = json.decode(value);
-      final jobs = jsonData['jobs'];
-      if (jobs is List<dynamic> && jobs.length > 0) {
-        final newList = jobs
-            .map((job) => JobExperienceItem(
-                  jobExperience: JobExperience(
-                      title: job['title'],
-                      company: job['company'],
-                      startDate: job['startDate'],
-                      endDate: job['endDate'],
-                      location: job['location'],
-                      description: job['description']),
-                ))
-            .toList();
+    if (_experienceList.length == 1) {
+      DefaultAssetBundle.of(context)
+          .loadString('lib/assets/data/job_data.json')
+          .then((value) {
+        final jsonData = json.decode(value);
+        final jobs = jsonData['jobs'];
+        if (jobs is List<dynamic> && jobs.length > 0) {
+          final newList = jobs
+              .map((job) => JobExperienceItem(
+                    jobExperience: JobExperience(
+                        title: job['title'],
+                        company: job['company'],
+                        startDate: job['startDate'],
+                        endDate: job['endDate'],
+                        location: job['location'],
+                        description: job['description']),
+                  ))
+              .toList();
 
-        setState(() {
-          _experienceList.addAll(newList);
-        });
-      }
-    });
+          if (this.mounted) {
+            setState(() {
+              _experienceList.addAll(newList);
+            });
+          }
+        }
+      });
+    }
 
     return SingleChildScrollView(
       child: Column(
@@ -56,11 +60,22 @@ class _ExperienceListState extends State<ExperienceList> {
   }
 
   _resumeHeader() {
-    return Column(children: [
-      Helpers.styledText(Helpers.fullName, Styles.headingSubBold),
-      Helpers.styledText(Helpers.email, Styles.textLarge),
-      Helpers.styledText(Helpers.phoneNumber, Styles.textLarge),
-    ]);
+    return Container(
+      width: double.infinity,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: Color(Styles.lightGray)),
+        ),
+      ),
+      child: Column(children: [
+        Helpers.styledText(Helpers.fullName, Styles.headingSubBold),
+        SizedBox(height: 12),
+        Helpers.styledText(Helpers.email, Styles.textLarge),
+        SizedBox(height: 12),
+        Helpers.styledText(Helpers.phoneNumber, Styles.textLarge),
+        SizedBox(height: 16)
+      ]),
+    );
   }
 }
 
