@@ -19,9 +19,18 @@ class BusinessCardTab extends StatelessWidget {
         child: Column(
           children: <Widget>[
             profilePhoto(context),
-            Helpers.styledText(fullName, Styles.headingMain),
-            Helpers.styledText(title, Styles.headingSub),
-            phoneDisplay(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Helpers.styledText(fullName, Styles.headingMain),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Helpers.styledText(title, Styles.headingSub),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: phoneDisplay(),
+            ),
             websiteButton(),
           ],
         ),
@@ -42,17 +51,24 @@ class BusinessCardTab extends StatelessWidget {
   }
 
   Widget websiteButton() {
-    return RaisedButton(
-      onPressed: () => _launchURL(website),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Helpers.styledText('Never Forget', Styles.textLarge),
-          Icon(
-            Icons.open_in_browser,
-            size: 24.0,
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 24.0, 0, 0),
+      child: RaisedButton(
+        onPressed: () => _launchURL(website),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Helpers.styledText('Never Forget', Styles.textLarge),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+              child: Icon(
+                Icons.open_in_browser,
+                size: 24.0,
+              ),
+            ),
+          ],
+        ),
+        color: Color(Styles.orangeSecondary),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:callmemaybe/styles.dart';
 import 'tab_screen.dart';
 
 void main() {
@@ -12,12 +13,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color(Styles.orangePrimary),
+        accentColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: Color(Styles.blueSecondary),
       ),
       home: TabScreen(),
     );
   }
 }
-
-
