@@ -64,6 +64,7 @@ class BusinessCardTab extends StatelessWidget {
               child: Icon(
                 Icons.open_in_browser,
                 size: 24.0,
+                color: Color(Styles.lightGray),
               ),
             ),
           ],

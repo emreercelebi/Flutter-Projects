@@ -35,4 +35,37 @@ class Styles {
     fontSize: 18.0,
     color: Color(lightGray),
   );
+
+  static final textLargeBold = TextStyle(
+    fontFamily: _fontFamilyName,
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold,
+    color: Color(lightGray),
+  );
+
+  static final textSub = TextStyle(
+    fontFamily: _fontFamilyName,
+    fontSize: 16.0,
+    color: Color(lightGray),
+  );
+
+  static final textSubBold = TextStyle(
+    fontFamily: _fontFamilyName,
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    color: Color(lightGray),
+  );
+
+  static final textSubItalic = TextStyle(
+    fontFamily: _fontFamilyName,
+    fontSize: 16.0,
+    fontStyle: FontStyle.italic,
+    color: Color(lightGray),
+  );
+
+  static final textBody = TextStyle(
+    fontFamily: _fontFamilyName,
+    fontSize: 14.0,
+    color: Color(lightGray),
+  );
 }

@@ -1,0 +1,36 @@
+{
+  "jobs": [
+    {
+      "title": "Software Engineer",
+      "company": "Yext, Inc.",
+      "startDate": "October 2019",
+      "endDate": "Present",
+      "location": "Arlington, VA",
+      "description": "- Build responsive websites for clients optimized for search engine exposure.\n\n- Build content-management dashboards."
+    },
+    {
+      "title": "Software Development Engineer Intern",
+      "company": "Amazon.com, Inc.",
+      "startDate": "June 2019",
+      "endDate": "September 2019",
+      "location": "Seattle, WA",
+      "description": "- Added functionality to internal mobile app used by beta testers to allow for feedback survey completion and submission within the app.\n\n- Designed push notification system for app to alert beta testers when a new feedback survey has been assigned."
+    },
+    {
+      "title": "Mechanical Engineer",
+      "company": "Pace Collaborative",
+      "startDate": "October 2018",
+      "endDate": "June 2019",
+      "location": "Richmond, VA",
+      "description": "- Performed site visits to examine existing conditions of HVAC and plumbing systems.\n\n- Performed heating and cooling load calculations using Trane Trace.\n\n- Selected equipment based on calculation results.\n\n- Designed and modeled HVAC and plumbing systems using AutoCAD and Revit.\n\n- Examined shop drawings to ensure contracted equipment met the specifications of designs."
+    },
+    {
+      "title": "Assistant Engineer 1",
+      "company": "CHA Consulting, Inc.",
+      "startDate": "June 2017",
+      "endDate": "October 2018",
+      "location": "Richmond, VA",
+      "description": "- Modeled HVAC and plumbing systems using AutoCAD and Revit.\n\n- Performed heating load calculations using Trane Trace"
+    }
+  ]
+}
