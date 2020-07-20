@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:callmemaybe/helpers.dart';
 import 'package:callmemaybe/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:callmemaybe/job_experience.dart';
+import 'package:callmemaybe/models/job_experience.dart';
 
 class ExperienceList extends StatefulWidget {
   @override
