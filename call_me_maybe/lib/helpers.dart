@@ -11,10 +11,19 @@ class Helpers {
   static final predictorHeading = 'Call me...maybe?';
   static final predictorPrompt = 'Ask a question, tap for an answer.';
 
-  static Widget styledText(text, style) {
+  static Widget styledText(text, style, {TextAlign textAlign = TextAlign.left}) {
     return Text(
       text,
       style: style,
+      textAlign: textAlign,
     );
+  }
+
+  static Axis setDirection(BuildContext context) {
+    if (MediaQuery.of(context).orientation == Orientation.portrait) {
+      return Axis.vertical;
+    } else {
+      return Axis.horizontal;
+    }
   }
 }

@@ -32,33 +32,29 @@ class _EightBallState extends State<EightBall> {
       child: Column(children: [
         Helpers.styledText(Helpers.predictorHeading, Styles.headingMain),
         Flex(
-          direction: _setDirection(context),
+          direction: Helpers.setDirection(context),
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GestureDetector(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Helpers.styledText(
-                    Helpers.predictorPrompt, Styles.headingSub),
+                  Helpers.predictorPrompt,
+                  Styles.headingSub,
+                  textAlign: TextAlign.center,
+                ),
               ),
               onTap: _shuffleIndex,
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Helpers.styledText(options[_currentIndex], Styles.headingMain),
+              child: Helpers.styledText(
+                  options[_currentIndex], Styles.headingMain),
             )
           ],
         )
       ]),
     );
-  }
-
-  Axis _setDirection(BuildContext context) {
-    if (MediaQuery.of(context).orientation == Orientation.portrait) {
-      return Axis.vertical;
-    } else {
-      return Axis.horizontal;
-    }
   }
 
   void _shuffleIndex() {

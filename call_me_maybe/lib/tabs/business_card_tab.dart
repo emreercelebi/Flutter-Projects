@@ -4,7 +4,6 @@ import 'package:callmemaybe/helpers.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class BusinessCardTab extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -12,20 +11,36 @@ class BusinessCardTab extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            profilePhoto(context),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Helpers.styledText(Helpers.fullName, Styles.headingMain),
+            Flex(
+              direction: Helpers.setDirection(context),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                profilePhoto(context),
+                SizedBox(
+                  width: 40.0,
+                  height: 40.0
+                ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Helpers.styledText(
+                          Helpers.fullName, Styles.headingMain),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child:
+                          Helpers.styledText(Helpers.title, Styles.headingSub),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: phoneDisplay(),
+                    ),
+                    websiteButton(),
+                  ],
+                )
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Helpers.styledText(Helpers.title, Styles.headingSub),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: phoneDisplay(),
-            ),
-            websiteButton(),
           ],
         ),
       ),
