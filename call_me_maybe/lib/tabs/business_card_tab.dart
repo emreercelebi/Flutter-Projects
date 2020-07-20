@@ -34,9 +34,16 @@ class BusinessCardTab extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
+                      child: Helpers.styledText(Helpers.email, Styles.textSubItalic),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
                       child: phoneDisplay(),
                     ),
-                    websiteButton(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: websiteDisplay(),
+                    ),
                   ],
                 )
               ],
@@ -59,27 +66,10 @@ class BusinessCardTab extends StatelessWidget {
     );
   }
 
-  Widget websiteButton() {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 24.0, 0, 0),
-      child: RaisedButton(
-        onPressed: () => _launchURL(Helpers.website),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Helpers.styledText('Never Forget', Styles.textLarge),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
-              child: Icon(
-                Icons.open_in_browser,
-                size: 24.0,
-                color: Color(Styles.lightGray),
-              ),
-            ),
-          ],
-        ),
-        color: Color(Styles.orangeSecondary),
-      ),
+  Widget websiteDisplay() {
+    return GestureDetector(
+      child: Helpers.styledText(Helpers.websiteText, Styles.textLink),
+      onTap: () => _launchURL(Helpers.website),
     );
   }
 
