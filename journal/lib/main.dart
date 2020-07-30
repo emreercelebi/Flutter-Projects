@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
+import 'journal_form.dart';
 
 void main() {
   runApp(App());
 }
 
 class App extends StatelessWidget {
-  // This widget is the root of your application.
+  static final routes = {
+    HomePage.route: (context) => HomePage(title: 'Journal'),
+    JournalForm.route: (context) => JournalForm(title: 'JournalForm')
+  };
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,7 +20,7 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Journal Entries'),
+      routes: routes,
     );
   }
 }
