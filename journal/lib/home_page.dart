@@ -18,21 +18,21 @@ class HomePage extends StatelessWidget {
       'title': 'Entry #1',
       'body':
           'this is dummy data that I will be using to test the layout of the journal entries',
-      'rating': 4,
+      'rating': '4',
       'date': new DateTime.now()
     },
     {
       'title': 'Entry #2',
       'body':
           'this is the second entry that I will be using to test the layout of the journal entries',
-      'rating': 1,
+      'rating': '1',
       'date': new DateTime.now()
     },
     {
       'title': 'Entry #3',
       'body':
           'this is the third entry that I will be using to test the layout of the journal entries',
-      'rating': 3,
+      'rating': '3',
       'date': new DateTime.now()
     }
   ];
