@@ -12,10 +12,9 @@ class HomePage extends StatelessWidget {
   final Function onDarkModeToggle;
   static const String route = '/';
 
-
   @override
   Widget build(BuildContext context) {
-
+    print('building homepage');
     return Scaffold(
       appBar: AppBar(
         title: Text(this.title),

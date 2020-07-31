@@ -26,6 +26,7 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    print('building in main');
     final darkModeText = Theme.of(context).textTheme.apply(
           bodyColor: Colors.white,
           displayColor: Colors.white,
@@ -52,6 +53,7 @@ class _AppState extends State<App> {
               title: 'JournalForm',
               isDarkMode: darkMode,
               onDarkModeToggle: this.setDarkMode,
+              reloadJournal: reloadJournal
             ),
       },
     );
@@ -61,5 +63,10 @@ class _AppState extends State<App> {
     setState(() {
       widget.preferences.setBool(DARK_MODE_KEY, value);
     });
+  }
+
+  void reloadJournal() {
+    print('calling setstate in main');
+    setState((){});
   }
 }

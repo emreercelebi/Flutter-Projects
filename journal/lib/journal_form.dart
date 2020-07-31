@@ -32,12 +32,13 @@ class JournalEntryFields {
 }
 
 class JournalForm extends StatefulWidget {
-  JournalForm({Key key, this.title, this.isDarkMode, this.onDarkModeToggle})
+  JournalForm({Key key, this.title, this.isDarkMode, this.onDarkModeToggle, this.reloadJournal})
       : super(key: key);
 
   final String title;
   final bool isDarkMode;
   final Function onDarkModeToggle;
+  final Function reloadJournal;
   static const String route = '/journalForm';
 
   @override
@@ -94,7 +95,7 @@ class _JournalFormState extends State<JournalForm> {
                         formKey.currentState.save();
                         journalEntryFields.date = DateTime.now();
 
-                        await deleteDatabase('journal.db');
+//                        await deleteDatabase('journal.db');
                         final Database db = await openDatabase(
                           'journal.db',
                           version: 1,
@@ -109,6 +110,7 @@ class _JournalFormState extends State<JournalForm> {
                         });
 
                         await db.close();
+                        widget.reloadJournal();
 
                         Navigator.of(context).pop();
                       }
