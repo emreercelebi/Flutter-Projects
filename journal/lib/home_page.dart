@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:journal/models/journal_entry.dart';
 import 'journal_form.dart';
 import 'settings_drawer.dart';
 import 'journal_entry_list.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key key, this.title, this.isDarkMode, this.onDarkModeToggle})
+  HomePage({Key key, this.title, this.isDarkMode, this.onDarkModeToggle, this.entries})
       : super(key: key);
 
   final String title;
   final bool isDarkMode;
   final Function onDarkModeToggle;
+  final List<JournalEntry> entries;
   static const String route = '/';
 
   @override
@@ -28,7 +30,9 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: JournalEntryList(),
+      body: JournalEntryList(
+        entries: entries,
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _navigateToJournalForm(context),
       ),
