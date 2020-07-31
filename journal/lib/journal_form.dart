@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
 import 'settings_drawer.dart';
 
 class JournalEntryFields {
@@ -88,10 +89,27 @@ class _JournalFormState extends State<JournalForm> {
                     child: Text('Cancel'),
                   ),
                   RaisedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (formKey.currentState.validate()) {
                         formKey.currentState.save();
                         journalEntryFields.date = DateTime.now();
+
+                        await deleteDatabase('journal.db');
+                        final Database db = await openDatabase(
+                          'journal.db',
+                          version: 1,
+                          onCreate: (Database db, int version) async {
+                            await db.execute(
+                                'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, body TEXT, rating TEXT, date DATETIME)');
+                          },
+                        );
+                        await db.transaction( (txn) async {
+                          await txn.rawInsert('INSERT INTO journal_entries(title, body, rating, date) VALUES(?, ?, ?, ?)',
+                           [journalEntryFields.title, journalEntryFields.body, journalEntryFields.rating, journalEntryFields.date.toIso8601String()]);
+                        });
+
+                        await db.close();
+
                         Navigator.of(context).pop();
                       }
                     },
