@@ -3,9 +3,11 @@ import 'journal_form.dart';
 import 'settings_drawer.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  HomePage({Key key, this.title, this.isDarkMode, this.onDarkModeToggle}) : super(key: key);
 
   final String title;
+  final bool isDarkMode;
+  final Function onDarkModeToggle;
   static const String route = '/';
 
   @override
@@ -24,11 +26,14 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: Text(
-          'hello'), // This trailing comma makes auto-formatting nicer for build methods.
+          'Dark mode: $isDarkMode'), // This trailing comma makes auto-formatting nicer for build methods.
       floatingActionButton: FloatingActionButton(
         onPressed: () => _navigateToJournalForm(context),
       ),
-      endDrawer: SettingsDrawer(),
+      endDrawer: SettingsDrawer(
+        isDarkMode: isDarkMode,
+        onDarkModeToggle: onDarkModeToggle,
+      ),
     );
   }
 
