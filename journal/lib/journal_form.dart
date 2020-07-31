@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'settings_drawer.dart';
 
 class JournalForm extends StatelessWidget {
-  JournalForm({Key key, this.title}) : super(key: key);
+  JournalForm({Key key, this.title, this.isDarkMode, this.onDarkModeToggle}) : super(key: key);
 
   final String title;
+  final bool isDarkMode;
+  final Function onDarkModeToggle;
   static const String route = '/journalForm';
 
   @override
@@ -24,7 +26,10 @@ class JournalForm extends StatelessWidget {
       ),
       body: Text(
           'this is the journal form page'), // This trailing comma makes auto-formatting nicer for build methods.
-      endDrawer: SettingsDrawer(),
+      endDrawer: SettingsDrawer(
+        isDarkMode: isDarkMode,
+        onDarkModeToggle: onDarkModeToggle,
+      ),
     );
   }
 }

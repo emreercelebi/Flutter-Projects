@@ -26,11 +26,21 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    final darkModeText = Theme.of(context).textTheme.apply(
+          bodyColor: Colors.white,
+          displayColor: Colors.white,
+        );
+    final lightModeText = Theme.of(context).textTheme.apply(
+          bodyColor: Colors.black,
+          displayColor: Colors.black,
+        );
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: darkMode ? Colors.cyan : Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: darkMode ? Color(0xff272727) : Colors.white,
+        textTheme: darkMode ? darkModeText : lightModeText,
       ),
       routes: {
         HomePage.route: (context) => HomePage(
@@ -38,7 +48,11 @@ class _AppState extends State<App> {
               isDarkMode: darkMode,
               onDarkModeToggle: this.setDarkMode,
             ),
-        JournalForm.route: (context) => JournalForm(title: 'JournalForm')
+        JournalForm.route: (context) => JournalForm(
+              title: 'JournalForm',
+              isDarkMode: darkMode,
+              onDarkModeToggle: this.setDarkMode,
+            ),
       },
     );
   }
