@@ -1,6 +1,35 @@
 import 'package:flutter/material.dart';
 import 'settings_drawer.dart';
 
+class JournalEntryFields {
+  String title;
+  String body;
+  DateTime date;
+  String rating;
+
+  String toString() {
+    return 'Title: $title, Body: $body, Time: $date, Rating: $rating';
+  }
+
+  void setValue(field, value) {
+    switch (field) {
+      case 'title':
+        this.title = value;
+        break;
+      case 'body':
+        this.body = value;
+        break;
+      case 'date':
+        this.date = value;
+        break;
+      case 'rating':
+        this.rating = value;
+        break;
+      default:
+    }
+  }
+}
+
 class JournalForm extends StatefulWidget {
   JournalForm({Key key, this.title, this.isDarkMode, this.onDarkModeToggle})
       : super(key: key);
@@ -16,6 +45,7 @@ class JournalForm extends StatefulWidget {
 
 class _JournalFormState extends State<JournalForm> {
   final formKey = GlobalKey<FormState>();
+  final journalEntryFields = JournalEntryFields();
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +68,16 @@ class _JournalFormState extends State<JournalForm> {
           key: formKey,
           child: Column(
             children: [
+              _field(journalEntryFields, 'Title', 'Please enter a title',
+                  'title', _validateNonEmpty),
+              _field(journalEntryFields, 'Body', 'Please enter a body', 'body',
+                  _validateNonEmpty),
               _field(
-                  'Title', 'Please enter a title', 'title', _validateNonEmpty),
-              _field('Body', 'Please enter a body', 'body', _validateNonEmpty),
-              _field('Rating', 'Please enter a number between 1 and 4',
-                  'rating', _validateRating),
+                  journalEntryFields,
+                  'Rating',
+                  'Please enter a number between 1 and 4',
+                  'rating',
+                  _validateRating),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -56,6 +91,7 @@ class _JournalFormState extends State<JournalForm> {
                     onPressed: () {
                       if (formKey.currentState.validate()) {
                         formKey.currentState.save();
+                        journalEntryFields.date = DateTime.now();
                         Navigator.of(context).pop();
                       }
                     },
@@ -99,7 +135,8 @@ class _JournalFormState extends State<JournalForm> {
     return null;
   }
 
-  Widget _field(labelText, errorText, journalEntryField, validator) {
+  Widget _field(
+      journalEntryFields, labelText, errorText, journalEntryField, validator) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
@@ -108,8 +145,7 @@ class _JournalFormState extends State<JournalForm> {
           border: OutlineInputBorder(),
         ),
         onSaved: (value) {
-          //store value in journal entry object
-          print(journalEntryField + ' saved');
+          journalEntryFields.setValue(journalEntryField, value);
         },
         validator: (value) {
           return validator(value, errorText);
