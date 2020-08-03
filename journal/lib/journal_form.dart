@@ -32,7 +32,12 @@ class JournalEntryFields {
 }
 
 class JournalForm extends StatefulWidget {
-  JournalForm({Key key, this.title, this.isDarkMode, this.onDarkModeToggle, this.reloadJournal})
+  JournalForm(
+      {Key key,
+      this.title,
+      this.isDarkMode,
+      this.onDarkModeToggle,
+      this.reloadJournal})
       : super(key: key);
 
   final String title;
@@ -71,15 +76,16 @@ class _JournalFormState extends State<JournalForm> {
           child: Column(
             children: [
               _field(journalEntryFields, 'Title', 'Please enter a title',
-                  'title', _validateNonEmpty),
+                  'title', _validateNonEmpty, widget.isDarkMode),
               _field(journalEntryFields, 'Body', 'Please enter a body', 'body',
-                  _validateNonEmpty),
+                  _validateNonEmpty, widget.isDarkMode),
               _field(
                   journalEntryFields,
                   'Rating',
                   'Please enter a number between 1 and 4',
                   'rating',
-                  _validateRating),
+                  _validateRating,
+                  widget.isDarkMode),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -104,9 +110,15 @@ class _JournalFormState extends State<JournalForm> {
                                 'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, body TEXT, rating TEXT, date DATETIME)');
                           },
                         );
-                        await db.transaction( (txn) async {
-                          await txn.rawInsert('INSERT INTO journal_entries(title, body, rating, date) VALUES(?, ?, ?, ?)',
-                           [journalEntryFields.title, journalEntryFields.body, journalEntryFields.rating, journalEntryFields.date.toIso8601String()]);
+                        await db.transaction((txn) async {
+                          await txn.rawInsert(
+                              'INSERT INTO journal_entries(title, body, rating, date) VALUES(?, ?, ?, ?)',
+                              [
+                                journalEntryFields.title,
+                                journalEntryFields.body,
+                                journalEntryFields.rating,
+                                journalEntryFields.date.toIso8601String()
+                              ]);
                         });
 
                         await db.close();
@@ -155,14 +167,26 @@ class _JournalFormState extends State<JournalForm> {
     return null;
   }
 
-  Widget _field(
-      journalEntryFields, labelText, errorText, journalEntryField, validator) {
+  Widget _field(journalEntryFields, labelText, errorText, journalEntryField,
+      validator, isDarkMode) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
         decoration: InputDecoration(
           labelText: labelText,
           border: OutlineInputBorder(),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: isDarkMode ? Colors.white : Colors.black,
+              width: 1.0,
+            ),
+          ),
+          hintStyle: TextStyle(
+            color: isDarkMode ? Colors.white : Colors.black,
+          ),
+          labelStyle: TextStyle(
+            color: isDarkMode ? Colors.white70 : Colors.black26,
+          ),
         ),
         onSaved: (value) {
           journalEntryFields.setValue(journalEntryField, value);
