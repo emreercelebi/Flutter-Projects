@@ -32,25 +32,32 @@ class JournalEntryList extends StatelessWidget {
           itemCount: length,
           itemBuilder: (context, i) {
             final entry = entries[i];
-            return ListTile(
-              title: Text(
-                entry.title,
-                style: Styles.headingSubBold,
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListTile(
+                title: Text(
+                  entry.title,
+                  style: Styles.headingSubBold,
+                ),
+                subtitle: Padding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 8.0, 0.0, 0.0),
+                  child: Text(entry.body,
+                  style: Styles.textSub,),
+                ),
+                trailing: Text(Helpers.dateToString(entry.date)),
+                onTap: () {
+                  selectEntry(entry);
+                  if (MediaQuery.of(context).size.width < 700) {
+                    Navigator.of(context).pushNamed(
+                      JournalEntryDetails.route,
+                      arguments: DetailsArgs(
+                          entry: entry,
+                          isDarkMode: isDarkMode,
+                          onDarkModeToggle: onDarkModeToggle),
+                    );
+                  }
+                },
               ),
-              subtitle: Text(entry.body),
-              trailing: Text(Helpers.dateToString(entry.date)),
-              onTap: () {
-                selectEntry(entry);
-                if (MediaQuery.of(context).size.width < 700) {
-                  Navigator.of(context).pushNamed(
-                    JournalEntryDetails.route,
-                    arguments: DetailsArgs(
-                        entry: entry,
-                        isDarkMode: isDarkMode,
-                        onDarkModeToggle: onDarkModeToggle),
-                  );
-                }
-              },
             );
           });
     }

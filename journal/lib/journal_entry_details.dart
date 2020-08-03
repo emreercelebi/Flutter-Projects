@@ -3,6 +3,7 @@ import 'package:journal/models/details_args.dart';
 import 'models/journal_entry.dart';
 import 'helpers.dart';
 import 'settings_drawer.dart';
+import 'styles.dart';
 
 class JournalEntryDetails extends StatelessWidget {
   final JournalEntry entry;
@@ -62,11 +63,27 @@ class JournalEntryDetails extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(journalEntry.title),
-          Text(journalEntry.body),
-          Text(journalEntry.rating),
-          Text(Helpers.dateToString(journalEntry.date)),
+          Text(
+            journalEntry.title,
+            style: Styles.headingMain,
+          ),
+          SizedBox(height: 18.0),
+          Text(
+            journalEntry.body,
+            style: Styles.textLarge,
+          ),
+          SizedBox(height: 16.0),
+          Text(
+            'rating: ' + journalEntry.rating,
+            style: Styles.textSub,
+          ),
+          SizedBox(height: 12.0),
+          Text(
+            Helpers.dateToString(journalEntry.date),
+            style: Styles.textSubItalic,
+          ),
         ],
       ),
     );
