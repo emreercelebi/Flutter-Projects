@@ -85,8 +85,10 @@ class _HomePageState extends State<HomePage> {
             onDarkModeToggle: widget.onDarkModeToggle,
           ),
         ),
-        JournalEntryDetails(
-          entry: selectedEntry,
+        Expanded(
+          child: JournalEntryDetails(
+            entry: selectedEntry,
+          ),
         ),
       ],
     );

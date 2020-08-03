@@ -55,7 +55,7 @@ class JournalEntryDetails extends StatelessWidget {
         return detailsBody(journalEntry);
       }
     } else {
-      return Text('select a journal entry');
+      return Text('');
     }
   }
 

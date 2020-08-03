@@ -101,24 +101,27 @@ class _JournalFormState extends State<JournalForm> {
                         formKey.currentState.save();
                         journalEntryFields.date = DateTime.now();
 
-                        await deleteDatabase('journal.db');
+                        final createQuery = await DefaultAssetBundle.of(context)
+                            .loadString('lib/assets/create_table.txt');
+
+                        final insertQuery = await DefaultAssetBundle.of(context)
+                            .loadString('lib/assets/insert_query.txt');
+
+//                        await deleteDatabase('journal.db');
                         final Database db = await openDatabase(
                           'journal.db',
                           version: 1,
                           onCreate: (Database db, int version) async {
-                            await db.execute(
-                                'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, body TEXT, rating TEXT, date DATETIME)');
+                            await db.execute(createQuery);
                           },
                         );
                         await db.transaction((txn) async {
-                          await txn.rawInsert(
-                              'INSERT INTO journal_entries(title, body, rating, date) VALUES(?, ?, ?, ?)',
-                              [
-                                journalEntryFields.title,
-                                journalEntryFields.body,
-                                journalEntryFields.rating,
-                                journalEntryFields.date.toIso8601String()
-                              ]);
+                          await txn.rawInsert(insertQuery, [
+                            journalEntryFields.title,
+                            journalEntryFields.body,
+                            journalEntryFields.rating,
+                            journalEntryFields.date.toIso8601String()
+                          ]);
                         });
 
                         await db.close();
