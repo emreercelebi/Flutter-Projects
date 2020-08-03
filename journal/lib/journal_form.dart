@@ -95,7 +95,7 @@ class _JournalFormState extends State<JournalForm> {
                         formKey.currentState.save();
                         journalEntryFields.date = DateTime.now();
 
-//                        await deleteDatabase('journal.db');
+                        await deleteDatabase('journal.db');
                         final Database db = await openDatabase(
                           'journal.db',
                           version: 1,

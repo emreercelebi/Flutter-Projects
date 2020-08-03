@@ -31,10 +31,12 @@ class HomePage extends StatelessWidget {
         ],
       ),
       body: JournalEntryList(
+        isDarkMode: isDarkMode,
         entries: entries,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _navigateToJournalForm(context),
+        child: Icon(Icons.add),
       ),
       endDrawer: SettingsDrawer(
         isDarkMode: isDarkMode,
