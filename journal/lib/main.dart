@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'home_page.dart';
 import 'journal_form.dart';
 import 'models/journal_entry.dart';
+import 'journal_entry_details.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +44,8 @@ class _AppState extends State<App> {
             'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, body TEXT, rating TEXT, date DATETIME)');
       },
     );
-    List<Map> journalRecords = await db.rawQuery('SELECT * FROM journal_entries');
+    List<Map> journalRecords =
+        await db.rawQuery('SELECT * FROM journal_entries');
     final journalEntryList = journalRecords.map((record) {
       return JournalEntry(
         title: record['title'],
@@ -84,11 +86,11 @@ class _AppState extends State<App> {
               entries: entries,
             ),
         JournalForm.route: (context) => JournalForm(
-              title: 'JournalForm',
-              isDarkMode: darkMode,
-              onDarkModeToggle: this.setDarkMode,
-              reloadJournal: loadJournalEntries
-            ),
+            title: 'JournalForm',
+            isDarkMode: darkMode,
+            onDarkModeToggle: this.setDarkMode,
+            reloadJournal: loadJournalEntries),
+        JournalEntryDetails.route: (context) => JournalEntryDetails(),
       },
     );
   }

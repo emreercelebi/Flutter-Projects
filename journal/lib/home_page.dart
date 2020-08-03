@@ -3,9 +3,15 @@ import 'package:journal/models/journal_entry.dart';
 import 'journal_form.dart';
 import 'settings_drawer.dart';
 import 'journal_entry_list.dart';
+import 'journal_entry_details.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({Key key, this.title, this.isDarkMode, this.onDarkModeToggle, this.entries})
+class HomePage extends StatefulWidget {
+  HomePage(
+      {Key key,
+      this.title,
+      this.isDarkMode,
+      this.onDarkModeToggle,
+      this.entries})
       : super(key: key);
 
   final String title;
@@ -15,11 +21,17 @@ class HomePage extends StatelessWidget {
   static const String route = '/';
 
   @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var selectedEntry;
+
+  @override
   Widget build(BuildContext context) {
-    print('building homepage');
     return Scaffold(
       appBar: AppBar(
-        title: Text(this.title),
+        title: Text(widget.title),
         actions: [
           Builder(
             builder: (context) => IconButton(
@@ -30,19 +42,60 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: JournalEntryList(
-        isDarkMode: isDarkMode,
-        entries: entries,
+      body: Container(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            print(constraints);
+            return constraints.maxWidth < 700
+                ? verticalLayout()
+                : horizontalLayout();
+          },
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _navigateToJournalForm(context),
         child: Icon(Icons.add),
       ),
       endDrawer: SettingsDrawer(
-        isDarkMode: isDarkMode,
-        onDarkModeToggle: onDarkModeToggle,
+        isDarkMode: widget.isDarkMode,
+        onDarkModeToggle: widget.onDarkModeToggle,
       ),
     );
+  }
+
+  Widget verticalLayout() {
+    return JournalEntryList(
+      isDarkMode: widget.isDarkMode,
+      entries: widget.entries,
+      selectEntry: selectEntry,
+      onDarkModeToggle: widget.onDarkModeToggle,
+    );
+  }
+
+  Widget horizontalLayout() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          constraints: BoxConstraints(maxWidth: 400.0),
+          child: JournalEntryList(
+            isDarkMode: widget.isDarkMode,
+            entries: widget.entries,
+            selectEntry: selectEntry,
+            onDarkModeToggle: widget.onDarkModeToggle,
+          ),
+        ),
+        JournalEntryDetails(
+          entry: selectedEntry,
+        ),
+      ],
+    );
+  }
+
+  void selectEntry(journalEntry) {
+    setState(() {
+      selectedEntry = journalEntry;
+    });
   }
 
   void _navigateToJournalForm(context) {
