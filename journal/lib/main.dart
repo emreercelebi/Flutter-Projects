@@ -40,8 +40,9 @@ class _AppState extends State<App> {
       'journal.db',
       version: 1,
       onCreate: (Database db, int version) async {
-        await db.execute(
-            'CREATE TABLE IF NOT EXISTS journal_entries(id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, body TEXT, rating TEXT, date DATETIME)');
+        var createQuery = await DefaultAssetBundle.of(context)
+            .loadString('lib/assets/create_table.txt');
+        await db.execute(createQuery);
       },
     );
     List<Map> journalRecords =

@@ -90,7 +90,7 @@ class _JournalFormState extends State<JournalForm> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   RaisedButton(
-                    onPressed: () {
+                    onPressed: ()  {
                       Navigator.of(context).pop();
                     },
                     child: Text('Cancel'),

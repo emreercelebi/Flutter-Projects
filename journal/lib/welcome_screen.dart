@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'styles.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final bool isDarkMode;
@@ -22,6 +23,7 @@ class WelcomeScreen extends StatelessWidget {
             child: Text(
               'Welcome to your journal! Tap the add button to start writing entries',
               textAlign: TextAlign.center,
+              style: Styles.textLarge,
             ),
           ),
         ],
